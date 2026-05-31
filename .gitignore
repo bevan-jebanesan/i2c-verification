@@ -1,0 +1,11 @@
+# Simulation build artifacts
+work/
+**/work/
+transcript
+*.wlf
+*.ucdb
+*.vstf
+vsim.wlf
+*.log
+.DS_Store
+__MACOSX/
