@@ -9,7 +9,7 @@ A layered **SystemVerilog** verification environment for an OpenCores **I²C Mul
 | Metric | Result |
 |--------|--------|
 | Functional coverage | **100%** across 11 covergroups, **57/57 bins**, 15 coverpoints/crosses |
-| Scoreboard | **200+ self-checked transactions, 0 mismatches** |
+| Scoreboard | **238 self-checked transactions, 0 mismatches** |
 | Code coverage | **82% statement · 81% branch · 88% FSM-state** |
 | Stimulus | directed + constrained-random tests · **6-seed regression** |
 | Test plan | 20+ items, linked to RTL via XML → UCDB |
