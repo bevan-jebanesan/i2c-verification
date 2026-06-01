@@ -1,4 +1,4 @@
-# I²C Multi-Bus Controller — Functional Verification
+# I²C Multi-Bus Controller Functional Verification
 
 A layered **SystemVerilog** verification environment for an OpenCores **I²C Multiple-Bus Controller (IICMB)** RTL core, controlled over a **Wishbone** bus. The testbench drives the Wishbone register side, models the I²C slave on the bus side, and uses a **reference-model predictor + self-checking scoreboard** with **coverage-driven closure** of a written test plan.
 
@@ -8,7 +8,7 @@ A layered **SystemVerilog** verification environment for an OpenCores **I²C Mul
 
 | Metric | Result |
 |--------|--------|
-| Functional coverage | **100%** — 11 covergroups, **57/57 bins**, 15 coverpoints/crosses |
+| Functional coverage | **100%** across 11 covergroups, **57/57 bins**, 15 coverpoints/crosses |
 | Scoreboard | **200+ self-checked transactions, 0 mismatches** |
 | Code coverage | **82% statement · 81% branch · 88% FSM-state** |
 | Stimulus | directed + constrained-random tests · **6-seed regression** |
@@ -19,7 +19,7 @@ A layered **SystemVerilog** verification environment for an OpenCores **I²C Mul
 
 ```
             top.sv
-  wb_if <—Wishbone—> [ IICMB DUT (VHDL) ] <—I²C scl/sda—> i2c_if
+  wb_if <--Wishbone--> [ IICMB DUT (VHDL) ] <--I2C scl/sda--> i2c_if
                           |
    ┌─────────────── i2cmb_test / i2cmb_environment ───────────────┐
    │  generator ─ drives Wishbone (control) + I²C slave (bus)      │
@@ -45,11 +45,11 @@ The **predictor** watches Wishbone register writes (DPR/CMDR) and predicts the e
 
 - **Functional coverage** (11 covergroups): I²C op/address/data + op×data cross + op transitions, plus register-side groups (CSR fields, DPR access, CMDR command/status/read, command-sequence transitions). Closed to **57/57 bins**.
 - **Code coverage**: root-caused gaps from FSM/transition reports and added targeted tests for uncovered states (WAIT command, SET_BUS error, illegal-command-in-idle), lifting FSM-state coverage to 88%.
-- Remaining uncovered code is concentrated in arbitration-lost / reset arcs that require a second bus master or mid-transfer disable — documented as unreachable in this single-master bench.
+- Remaining uncovered code is concentrated in arbitration-lost / reset arcs that require a second bus master or mid-transfer disable, documented as unreachable in this single-master bench.
 
 ## Regression flow (`regress.sh`)
 
-One command runs all tests across 6 seeds, merges per-seed UCDBs into `merged_tests.ucdb`, converts the test-plan XML to `test_plan.ucdb`, merges both into a single **`regression.ucdb`**, and opens the coverage GUI — reproducible signoff with no manual steps.
+One command runs all tests across 6 seeds, merges per-seed UCDBs into `merged_tests.ucdb`, converts the test-plan XML to `test_plan.ucdb`, merges both into a single **`regression.ucdb`**, and opens the coverage GUI for reproducible signoff with no manual steps.
 
 ```bash
 cd project_benches/proj4/sim
